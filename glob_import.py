@@ -30,7 +30,6 @@ for item in df :
     df[i]['Year']= n
     i= i  + 1
     n= n + 1
-
 print(df[0].head())
 print(df[-1].tail())
 
@@ -38,7 +37,6 @@ print(df[-1].tail())
 names= pd.concat(df)
 print(names.info())
 #print(names[100000:])
-
 #_______________________________________________________________________________
 # Initial Exploratory data review
 # plt.scatter(x=names.Year, y=names.Count)
@@ -70,10 +68,11 @@ total_births_by_year = names2.groupby('Year')['Count'].transform('sum')
 names2['prop_births']= names2['Count']/total_births_by_year
 print(names2)
 print(names2.shape)
-
+#_______________________________________________________________________________
 #create dataframe with female names
-names_f = names2['Sex'] == 'F'
-names_f= names2[names_f]
+female = names2['Sex'] == 'F'
+names_f= names2[female]
+print('names_f tail ^^^^^^^^^^^^^^^^^^^^^^^^^')
 print(names_f.tail())
 #Select top 5 female names for each year
 top5_f= names_f.groupby('Year').head()
@@ -89,15 +88,14 @@ print(top5_fnames.head())
 # #Pivot the dataframe to make years columns
 top5_fnames_tidy = top5_fnames.pivot_table(values='prop_births', index=['Name'], columns=['Year'])
 top5_fnames_tidy = top5_fnames_tidy.fillna(0)
-print(top5_fnames_tidy.head())
-print(top5_fnames_tidy.tail())
-print(top5_fnames_tidy.info())
+# print(top5_fnames_tidy.head())
+# print(top5_fnames_tidy.tail())
+# print(top5_fnames_tidy.info())
 
 top5_fnames_tidy= top5_fnames_tidy.reset_index()
-print(top5_fnames_tidy.info())
-print(top5_fnames_tidy.head())
-print('&&&&&&&&&&&&&&&&&&')
-print(top5_fnames_tidy.shape)
+# print(top5_fnames_tidy.info())
+# print(top5_fnames_tidy.head())
+# print(top5_fnames_tidy.shape)
 
 top5_fnames_tidy= top5_fnames_tidy.set_index('Name')
 df=[]
@@ -109,9 +107,9 @@ for item in top5_fnames_tidy :
         n = n + 1
 top5_fnames= pd.concat(df, axis=1)
 top5_fnames= top5_fnames.reset_index()
-print(top5_fnames.info())
-print(top5_fnames.head())
-print(top5_fnames.shape)
+# print(top5_fnames.info())
+# print(top5_fnames.head())
+# print(top5_fnames.shape)
 
 #Plots for top 5 girls names over the years
 n=1
@@ -225,7 +223,6 @@ print(top5_mnames_tidy.info())
 top5_mnames_tidy= top5_mnames_tidy.reset_index()
 print(top5_mnames_tidy.info())
 print(top5_mnames_tidy.head())
-print('&&&&&&&&&&&&&&&&&&')
 print(top5_mnames_tidy.shape)
 #_____________________________________________________________________
 #create 'tidy' dataframe for boys names
@@ -273,7 +270,7 @@ plt.xticks(rotation='vertical')
 plt.ylim(-0.005, 0.05)
 plt.subplots_adjust(left=0.2)
 plt.ylabel('Proportion of Names')
-plt.title('Top 5 Boyss Names')
+plt.title('Top 5 Boys Names')
 plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
 plt.margins(0.1)
 plt.savefig('scatter_top5_boyss_names2.pdf')
@@ -315,29 +312,32 @@ plt.show()
 
 #_______________________________________________________________________________
 #Create dataframe with only female names
-female = names['Sex'] == 'F'
-fnames= names[female]
-del fnames['Sex']
-print('fnames info')
-print(fnames.info())
+print('names_f info********************')
+print(names_f.info())
+print(names_f.head())
 #create a list frequent female names
 dupf= names_f.groupby('Name').sum()
 print('dup_f info')
 print(dupf.info())
-freq_f = dupf['Count'] >= 20000
+freq_f = dupf['prop_births'] >= 0.1
 common_f= dupf[freq_f]
-print(common_f[250:260])
+print(common_f)
+print('common_f ***************************')
+print(common_f[20:25])
 print(common_f.info())
 common_f= common_f.reset_index()
+print(common_f.tail())
+print('common_fnames ^^^^^^^^^^^^^^^^^^^^^^')
 common_fnames= common_f['Name']
+print(common_f['Name'])
 freq_fnames= common_fnames.tolist()
-print(freq_fnames[700:750])
+print(freq_fnames)
 
 #set fnames index to Name and pull out the common names
+fnames= names_f.set_index('Name')
 print(fnames.info())
-fnames=fnames.set_index('Name')
-common_f= fnames.loc[common_fnames]
-common_df= common_f.reset_index()
+common_girls= fnames.loc[freq_fnames]
+common_df= common_girls.reset_index()
 print(common_df.head())
 print(common_df.info())
 #
