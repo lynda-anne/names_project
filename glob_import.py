@@ -64,7 +64,6 @@ print(names.info())
 #calculate proportion of count for each name
 names2 = names.copy()
 total_births_by_year = names2.groupby('Year')['Count'].transform('sum')
-#print(total_births_by_year)
 names2['prop_births']= names2['Count']/total_births_by_year
 print(names2)
 print(names2.shape)
@@ -72,7 +71,6 @@ print(names2.shape)
 #create dataframe with female names
 female = names2['Sex'] == 'F'
 names_f= names2[female]
-print('names_f tail ^^^^^^^^^^^^^^^^^^^^^^^^^')
 print(names_f.tail())
 #Select top 5 female names for each year
 top5_f= names_f.groupby('Year').head()
@@ -198,7 +196,7 @@ plt.savefig('scatter_top5_girls_names5.pdf')
 plt.show()
 
 #_______________________________________________________________________________
-#find top 5 boys names for each year
+#Create dataframe with males names
 names_m = names2['Sex'] == 'M'
 names_m= names2[names_m]
 print(names_m.tail())
@@ -311,8 +309,7 @@ plt.savefig('scatter_top5_boys_names4.pdf')
 plt.show()
 
 #_______________________________________________________________________________
-#Create dataframe with only female names
-print('names_f info********************')
+#Review dataframe with only female names
 print(names_f.info())
 print(names_f.head())
 #create a list frequent female names
@@ -322,12 +319,10 @@ print(dupf.info())
 freq_f = dupf['prop_births'] >= 0.1
 common_f= dupf[freq_f]
 print(common_f)
-print('common_f ***************************')
 print(common_f[20:25])
 print(common_f.info())
 common_f= common_f.reset_index()
 print(common_f.tail())
-print('common_fnames ^^^^^^^^^^^^^^^^^^^^^^')
 common_fnames= common_f['Name']
 print(common_f['Name'])
 freq_fnames= common_fnames.tolist()
@@ -342,7 +337,7 @@ print(common_df.head())
 print(common_df.info())
 #
 # #Pivot the dataframe to make years columns
-fnames_tidy = common_df.pivot_table(values='Count', index=['Name'], columns=['Year'])
+fnames_tidy = common_df.pivot_table(values='prop_births', index=['Name'], columns=['Year'])
 fnames_tidy = fnames_tidy.fillna(0)
 print(fnames_tidy.head())
 print(fnames_tidy.info())
@@ -386,7 +381,7 @@ for item in top10_fnames :
         i= i + 10
 plt.xticks(rotation='vertical')
 plt.subplots_adjust(bottom=0.2)
-plt.ylabel('Count')
+plt.ylabel('Proportion of Names')
 plt.title('Top 10 Traditional Girls Names')
 plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
 plt.margins(0.1)
@@ -406,7 +401,6 @@ del top10_fnames_chg[1880]
 # print(top10_fnames_chg.head())
 top10_fnames_chg = top10_fnames_chg.reset_index()
 print(top10_fnames_chg.info())
-print('^^^^^^^^^^^^^^^^^^^^^^^^^^')
 print(top10_fnames_chg.head())
 #plot above spilt out by early and late periods
 # i=1890
@@ -516,35 +510,35 @@ plt.margins(0.1)
 plt.savefig('scatter_traditional_girls_names3.pdf')
 plt.show()
 #___________________________________________________________________________________
-#male names
-male = names['Sex'] == 'M'
-mnames= names[male]
-del mnames['Sex']
-print('mnames info')
-print(mnames.info())
-#create a list frequent female names
-dupm= mnames.groupby('Name').sum()
-print('dupm info')
+#review dataframe with males names
+print(names_m.info())
+print(names_m.head())
+#create a list frequent male names
+dupm= names_m.groupby('Name').sum()
+print('dup_m info')
 print(dupm.info())
-freq_m = dupm['Count'] >= 20000
+freq_m = dupm['prop_births'] >= 0.1
 common_m= dupm[freq_m]
-print(common_m[250:260])
+print(common_m)
+print(common_m[20:25])
 print(common_m.info())
 common_m= common_m.reset_index()
+print(common_m.tail())
 common_mnames= common_m['Name']
+print(common_m['Name'])
 freq_mnames= common_mnames.tolist()
-print(freq_mnames[700:750])
+print(freq_mnames)
 
 #set fnames index to Name and pull out the common names
-print(mnames.info())
-mnames=mnames.set_index('Name')
-common_m= mnames.loc[common_mnames]
-common_dm= common_m.reset_index()
+names_m= names_m.set_index('Name')
+print(names_m.info())
+common_boys= names_m.loc[freq_mnames]
+common_dm= common_boys.reset_index()
 print(common_dm.head())
 print(common_dm.info())
 #
 # #Pivot the dataframe to make years columns
-mnames_tidy = common_dm.pivot_table(values='Count', index=['Name'], columns=['Year'])
+mnames_tidy = common_dm.pivot_table(values='prop_births', index=['Name'], columns=['Year'])
 mnames_tidy = mnames_tidy.fillna(0)
 print(mnames_tidy.head())
 print(mnames_tidy.info())
@@ -559,7 +553,7 @@ top10_mnames= mnames_tidy[0:9]
 top10_mnames= top10_mnames.reset_index()
 print(top10_mnames.info())
 #
-# #Extra plot Scatter plot of most popular boys names
+# #Extra plot Scatter plot of most popular girls names
 # i=1880
 # for item in top10_fnames :
 #     if i <= 2010 :
@@ -588,14 +582,14 @@ for item in top10_mnames :
         i= i + 10
 plt.xticks(rotation='vertical')
 plt.subplots_adjust(bottom=0.2)
-plt.ylabel('Count')
+plt.ylabel('Proportion of Names')
 plt.title('Top 10 Traditional Boys Names')
 plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
 plt.margins(0.1)
 plt.savefig('bar_top10_traditional_boys_names.pdf')
 plt.show()
 
-# #Calulate % change of name popularity top 10 boys names
+# #Calulate % change of name popularity top 10 girls names
 del top10_mnames['Total']
 top10_mnames= top10_mnames.set_index('Name')
 print(top10_mnames.head())
@@ -604,12 +598,12 @@ pd.set_option('use_inf_as_na', True)
 top10_mnames_chg= top10_mnames_chg.replace(np.inf, 0)
 top10_mnames_chg= top10_mnames_chg.fillna(0)
 del top10_mnames_chg[1880]
-print(top10_mnames_chg.info())
-print(top10_mnames_chg.head())
+# print(top10_fnames_chg.info())
+# print(top10_fnames_chg.head())
 top10_mnames_chg = top10_mnames_chg.reset_index()
 print(top10_mnames_chg.info())
-
-#extra plots that split the above data into early and late periods
+print(top10_mnames_chg.head())
+#plot above spilt out by early and late periods
 # i=1890
 # for item in top10_fnames_chg :
 #     if i <= 1939 :
@@ -653,7 +647,7 @@ print(top10_mnames_chg.info())
 # print(var_f_high)
 # print(var_f_high.info())
 
-#create DataFrame with top 10 Traditional boys names
+#Create dataframe of the top 10 Traditional boys names
 top10_mnames_chg= top10_mnames_chg.set_index('Name')
 dm=[]
 n= 0
@@ -668,7 +662,7 @@ mnames= mnames.reset_index()
 print(mnames.info())
 print(mnames.head())
 
-#Plot the % change of use of top 10 Traditional boys names
+#plot %Change of top 10 Traditional boys names
 n=1
 for item in mnames :
     if n <= 3 :
@@ -714,9 +708,10 @@ plt.ylabel('% Change')
 plt.title('% Change Traditional Boys Names')
 plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
 plt.margins(0.1)
-plt.savefig('scatter_traditional_boyss_names3.pdf')
+plt.savefig('scatter_traditional_boys_names3.pdf')
 plt.show()
 
+#_______________________________________________________________________________
 
 #___________________________________________________________________________________
 #source= ColumnDataSource(fnames_pctchange)
