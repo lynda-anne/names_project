@@ -87,10 +87,9 @@ print(top5_fnames.head())
 # #Pivot the dataframe to make years columns
 top5_fnames_tidy = top5_fnames.pivot_table(values='prop_births', index=['Name'], columns=['Year'])
 top5_fnames_tidy = top5_fnames_tidy.fillna(0)
-
 top5_fnames_tidy= top5_fnames_tidy.reset_index()
-
 top5_fnames_tidy= top5_fnames_tidy.set_index('Name')
+
 df=[]
 n= 0
 for item in top5_fnames_tidy :
@@ -102,90 +101,95 @@ top5_fnames= pd.concat(df, axis=1)
 top5_fnames= top5_fnames.reset_index()
 
 #Plots for top 5 girls names over the years
-n=1
-for item in top5_fnames :
-    if n <= 9 :
-        x= top5_fnames['Year']
-        y = top5_fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_girls_names1.pdf')
-plt.show()
+def top5_girls_names_1():
+    n=1
+    for item in top5_fnames :
+        if n <= 9 :
+            x= top5_fnames['Year']
+            y = top5_fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_girls_names1.pdf')
+    plt.show()
 
-n=10
-for item in top5_fnames :
-    if n <= 19:
-        x= top5_fnames['Year']
-        y = top5_fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_girls_names2.pdf')
-plt.show()
+def top5_girls_names_2():
+    n=10
+    for item in top5_fnames :
+        if n <= 19:
+            x= top5_fnames['Year']
+            y = top5_fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_girls_names2.pdf')
+    plt.show()
 
-n=20
-for item in top5_fnames :
-    if n <= 29:
-        x= top5_fnames['Year']
-        y = top5_fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_girls_names3.pdf')
-plt.show()
+def top5_girls_names_3():
+    n=20
+    for item in top5_fnames :
+        if n <= 29:
+            x= top5_fnames['Year']
+            y = top5_fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_girls_names3.pdf')
+    plt.show()
 
-n=30
-for item in top5_fnames :
-    if n <= 39:
-        x= top5_fnames['Year']
-        y = top5_fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_girls_names4.pdf')
-plt.show()
+def top5_girls_names_4():
+    n=30
+    for item in top5_fnames :
+        if n <= 39:
+            x= top5_fnames['Year']
+            y = top5_fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_girls_names4.pdf')
+    plt.show()
 
-n=40
-for item in top5_fnames :
-    if n <= 46:
-        x= top5_fnames['Year']
-        y = top5_fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_girls_names5.pdf')
-plt.show()
+def top5_girls_names_5():
+    n=40
+    for item in top5_fnames :
+        if n <= 46:
+            x= top5_fnames['Year']
+            y = top5_fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_girls_names5.pdf')
+    plt.show()
 
 #_______________________________________________________________________________
 #Create dataframe with males names
@@ -224,73 +228,77 @@ top5_mnames= pd.concat(df, axis=1)
 top5_mnames= top5_mnames.reset_index()
 
 #Plot the % change of use of top 5 boys names
-n=1
-for item in top5_mnames :
-    if n <= 5 :
-        x= top5_mnames['Year']
-        y = top5_mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_boyss_names1.pdf')
-plt.show()
+def top5_boys_names_1():
+    n=1
+    for item in top5_mnames :
+        if n <= 5 :
+            x= top5_mnames['Year']
+            y = top5_mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_boyss_names1.pdf')
+    plt.show()
 
-n=6
-for item in top5_mnames :
-    if n <= 10:
-        x= top5_mnames['Year']
-        y = top5_mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_boyss_names2.pdf')
-plt.show()
+def top5_boys_names_2():
+    n=6
+    for item in top5_mnames :
+        if n <= 10:
+            x= top5_mnames['Year']
+            y = top5_mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_boyss_names2.pdf')
+    plt.show()
 
-n=11
-for item in top5_mnames :
-    if n <= 20:
-        x= top5_mnames['Year']
-        y = top5_mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_boys_names3.pdf')
-plt.show()
+def top5_boys_names_3():
+    n=11
+    for item in top5_mnames :
+        if n <= 20:
+            x= top5_mnames['Year']
+            y = top5_mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_boys_names3.pdf')
+    plt.show()
 
-n=21
-for item in top5_mnames :
-    if n <= 25:
-        x= top5_mnames['Year']
-        y = top5_mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.ylim(-0.005, 0.05)
-plt.subplots_adjust(left=0.2)
-plt.ylabel('Proportion of Names')
-plt.title('Top 5 Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_top5_boys_names4.pdf')
-plt.show()
+def top5_boys_names_4():
+    n=21
+    for item in top5_mnames :
+        if n <= 25:
+            x= top5_mnames['Year']
+            y = top5_mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.ylim(-0.005, 0.05)
+    plt.subplots_adjust(left=0.2)
+    plt.ylabel('Proportion of Names')
+    plt.title('Top 5 Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_top5_boys_names4.pdf')
+    plt.show()
 
 #_______________________________________________________________________________
 #Review dataframe with only female names
@@ -326,7 +334,8 @@ fnames_tidy= fnames_tidy.sort_values(by= 'Total', ascending= False)
 top10_fnames= fnames_tidy[0:9]
 top10_fnames= top10_fnames.reset_index()
 
-# #Bar plot of most popluar girls names
+# #Bar plot of most popluar girls
+
 i=1880
 for item in top10_fnames :
     if i <= 2010 :
@@ -370,53 +379,56 @@ fnames= pd.concat(df, axis=1)
 fnames= fnames.reset_index()
 
 #plot %Change of top 10 Traditional girls names
-n=1
-for item in fnames :
-    if n <= 3 :
-        x= fnames['Year']
-        y = fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_girls_names1.pdf')
-plt.show()
+def pct_change_top10_gnames_1():
+    n=1
+    for item in fnames :
+        if n <= 3 :
+            x= fnames['Year']
+            y = fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_girls_names1.pdf')
+    plt.show()
 
-n=4
-for item in fnames :
-    if n <= 6 :
-        x= fnames['Year']
-        y = fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_girls_names2.pdf')
-plt.show()
+def pct_change_top10_gnames_2():
+    n=4
+    for item in fnames :
+        if n <= 6 :
+            x= fnames['Year']
+            y = fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_girls_names2.pdf')
+    plt.show()
 
-n=7
-for item in fnames :
-    if n <= 9 :
-        x= fnames['Year']
-        y = fnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Girls Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_girls_names3.pdf')
-plt.show()
+def pct_change_top10_gnames_3():
+    n=7
+    for item in fnames :
+        if n <= 9 :
+            x= fnames['Year']
+            y = fnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Girls Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_girls_names3.pdf')
+    plt.show()
 #___________________________________________________________________________________
 #review dataframe with males names
 print('REVIEW OF MALE NAMES DATAFRAME')
@@ -453,6 +465,7 @@ top10_mnames= mnames_tidy[0:9]
 top10_mnames= top10_mnames.reset_index()
 
 # #Bar plot of most popluar boys names
+
 i=1880
 for item in top10_mnames :
     if i <= 2010 :
@@ -496,53 +509,77 @@ mnames= pd.concat(dm, axis=1)
 mnames= mnames.reset_index()
 
 #plot %Change of top 10 Traditional boys names
-n=1
-for item in mnames :
-    if n <= 3 :
-        x= mnames['Year']
-        y = mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_boys_names1.pdf')
-plt.show()
+def pct_change_top10_bnames_1():
+    n=1
+    for item in mnames :
+        if n <= 3 :
+            x= mnames['Year']
+            y = mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_boys_names1.pdf')
+    plt.show()
 
-n=4
-for item in mnames :
-    if n <= 6 :
-        x= mnames['Year']
-        y = mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_boys_names2.pdf')
-plt.show()
+def pct_change_top10_bnames_2():
+    n=4
+    for item in mnames :
+        if n <= 6 :
+            x= mnames['Year']
+            y = mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_boys_names2.pdf')
+    plt.show()
 
-n=7
-for item in mnames :
-    if n <= 9 :
-        x= mnames['Year']
-        y = mnames.iloc[0:, n]
-        plt.scatter(x, y)
-        n= n + 1
-plt.xticks(rotation='vertical')
-plt.subplots_adjust(bottom=0.2)
-plt.ylabel('% Change')
-plt.title('% Change Traditional Boys Names')
-plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
-plt.margins(0.1)
-plt.savefig('scatter_traditional_boys_names3.pdf')
-plt.show()
+def pct_change_top10_bnames_3():
+    n=7
+    for item in mnames :
+        if n <= 9 :
+            x= mnames['Year']
+            y = mnames.iloc[0:, n]
+            plt.scatter(x, y)
+            n= n + 1
+    plt.xticks(rotation='vertical')
+    plt.subplots_adjust(bottom=0.2)
+    plt.ylabel('% Change')
+    plt.title('% Change Traditional Boys Names')
+    plt.legend(loc='best', fontsize='xx-small', markerscale=0.7)
+    plt.margins(0.1)
+    plt.savefig('scatter_traditional_boys_names3.pdf')
+    plt.show()
+
+
+top5_girls_names_1()
+top5_girls_names_2()
+top5_girls_names_3()
+top5_girls_names_4()
+top5_girls_names_5()
+
+pct_change_top10_gnames_1()
+pct_change_top10_gnames_2()
+pct_change_top10_gnames_3()
+
+top5_boys_names_1()
+top5_boys_names_2()
+top5_boys_names_3()
+top5_boys_names_4()
+top10_trad_boys_names_bar()
+pct_change_top10_bnames_1()
+pct_change_top10_bnames_2()
+pct_change_top10_bnames_3()
+
 
 #_______________________________________________________________________________
 
